@@ -5,15 +5,16 @@ require File.expand_path('../../vendor/shake/lib/shake', __FILE__)
 # Legacy Monk compatibility.
 # If there is a Thorfile (but no Monkfile), assume it's a Monk <1.0 project.
 # Defer to Thor for processing of that file.
-thor = nil #Shake.find_in_project('Thorfile')
-monk = nil #Shake.find_in_project('Monkfile')
-
-if thor && !monk
-  Dir.chdir File.dirname(thor)
-  require 'thor'
-  load 'Thorfile'
-  Monk.start
-  exit
+thor = Shake.find_in_project('Thorfile')
+if thor
+  monk = Shake.find_in_project('Monkfile')
+  if !monk
+    Dir.chdir File.dirname(thor)
+    require 'thor'
+    load 'Thorfile'
+    Monk.start
+    exit
+  end
 end
 
 require File.expand_path('../../lib/monk', __FILE__)
