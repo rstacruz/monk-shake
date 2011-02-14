@@ -19,6 +19,12 @@ module Monk::Helpers
     @has_rvm
   end
 
+  def ensure_rvm
+    return true  if rvm?
+    err "You need RVM installed for this command."
+    err "See http://rvm.beginrescueend.com for more info."
+  end
+
   def has_gem?(str)
     _, name, version = str.match(/^([A-Za-z_\-]+) -v(.*)$/).to_a
     name    ||= str

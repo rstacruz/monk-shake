@@ -74,6 +74,18 @@ class Monk < Shake
     gems.each { |name| system "gem install #{name}" }
   end
 
+  task(:unpack) do
+    ensure_rvm or pass
+    system "rvm rvmrc load"
+    system "rvm gemset unpack vendor"
+  end
+
+  task(:lock) do
+    ensure_rvm or pass
+    system "rvm rvmrc load"
+    system "rvm gemset export .gems"
+  end
+
   task(:add) do
     wrong_usage  unless params.size == 2
     name, repo = params
@@ -222,5 +234,15 @@ class Monk < Shake
   task(:install).tap do |t|
     t.category    = :dependency
     t.description = "Install gems in the .gems manifest file"
+  end
+
+  task(:unpack).tap do |t|
+    t.category    = :dependency
+    t.description = "Freeze gem dependencies into vendor/"
+  end
+
+  task(:lock).tap do |t|
+    t.category    = :dependency
+    t.description = "Lock gem dependencies into a .gems manifest file"
   end
 end
