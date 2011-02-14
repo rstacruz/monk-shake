@@ -1,4 +1,4 @@
 Monk
 ====
 
-New Clap-based monk?
+New Shake-based monk?

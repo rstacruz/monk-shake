@@ -1,7 +1,6 @@
 require 'fileutils'
 
 require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor shake lib shake)))
-require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor clap lib clap)))
 
 class Monk < Shake
   VERSION = "1.0.0.something"
@@ -15,17 +14,14 @@ class Monk < Shake
   extend InitHelpers
 
   task(:init) do
-    @options = { :skeleton => 'default' }
-    target, _ = Clap.run params,
-      "-s" => lambda { |s| @options[:skeleton] = s }
+    name   = params.extract('-s') || 'default'
+    target = params.shift
+    wrong_usage  if params.any?
 
-    wrong_usage  if target.nil?
-
-    name = @options[:skeleton]
     repo = config.skeletons[name]
 
     unless repo
-      pass "No such skeleton: #{@options[:skeleton]}\n" +
+      pass "No such skeleton: #{name}\n" +
            "Type `monk list` for a list of known skeletons."
     end
 
