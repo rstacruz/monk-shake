@@ -29,8 +29,13 @@ class Monk < Shake
 
     skeleton_files = cache_skeleton(name)
     cp_r skeleton_files, target
-    rm_rf File.join(target, '.git')
-    system "touch #{File.join(target, 'Monkfile')}"  # Temporary!
+
+    in_path (target) {
+      rm_rf '.git'
+      system 'touch "Monkfile"'
+      system_q "rvm 1.9.2@#{target} --rvmrc --create"  if rvm?
+      system_q "rvm rvmrc trust"  if rvm?
+    }
 
     puts 
     puts "Success! You've created a new project."
@@ -39,6 +44,11 @@ class Monk < Shake
     puts "  $ cd #{target}"
     puts "  $ #{executable} start"
     puts
+
+    if rvm?
+      puts "An RVM gemset @#{target} has been created for you."
+      puts
+    end
   end
 
   task(:add) do

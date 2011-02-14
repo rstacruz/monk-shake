@@ -14,10 +14,17 @@ module Monk::Helpers
     tasks.select { |name, t| t.category.nil? }
   end
 
-  def show_commands(for_tasks)
-    for_tasks.each do |name, task|
-      err "  %-20s %s" % [ name, task.description ]
-    end
+  def rvm?
+    @has_rvm = (!! `rvm` rescue false)  if @has_rvm.nil?
+    @has_rvm
+  end
+
+  def in_path(path, &blk)
+    old = Dir.pwd
+    Dir.chdir path
+    say_status :cd, path
+    yield
+    Dir.chdir old
   end
 
   # Loads the monkfile. Used by bin/monk.
@@ -43,6 +50,11 @@ module Monk::Helpers
   def system(cmd)
     say_status :run, cmd
     super
+  end
+
+  def system_q(cmd)
+    say_status :run, cmd
+    `#{cmd}`
   end
 
   def say_status(what, cmd)
