@@ -65,6 +65,12 @@ class Monk < Shake
     gems.reject! { |name| has_gem? name }
     pass "All good! You have all needed gems installed."  unless gems.any?
 
+    unless rvm?
+      err "Tip: RVM is a great way to manage gems across multiple projects."
+      err "See http://rvm.beginrescueend.com for more info."
+      err
+    end
+
     gems.each { |name| system "gem install #{name}" }
   end
 
