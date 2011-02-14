@@ -4,7 +4,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor shake li
 require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor clap lib clap)))
 
 class Monk < Shake
-  VERSION = "1.0.0"
+  VERSION = "1.0.0.something"
   PREFIX  = File.expand_path(File.join(File.dirname(__FILE__), 'monk'))
 
   autoload :Helpers,      "#{PREFIX}/helpers"
