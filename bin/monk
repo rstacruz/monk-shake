@@ -1,22 +1,3 @@
 #!/usr/bin/env ruby
-require 'rubygems'  if RUBY_VERSION <= "1.9"
-require File.expand_path('../../vendor/shake/lib/shake', __FILE__)
-
-# Legacy Monk compatibility.
-# If there is a Thorfile (but no Monkfile), assume it's a Monk <1.0 project.
-# Defer to Thor for processing of that file.
-thor = nil #Shake.find_in_project('Thorfile')
-monk = nil #Shake.find_in_project('Monkfile')
-
-if thor && !monk
-  Dir.chdir File.dirname(thor)
-  require 'thor'
-  load 'Thorfile'
-  Monk.start
-  exit
-end
-
 require File.expand_path('../../lib/monk', __FILE__)
-
-Monk.load_monkfile
-Monk.run!
+Monk.new(ARGV).run!
