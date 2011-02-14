@@ -17,7 +17,8 @@ class Monk::Config < OpenStruct
   def initialize(*a)
     super
     self.skeletons ||= Hash.new
-    self.skeletons['default'] ||= 'git://github.com/monk/experimental.git'
+    # At the time of writing, this is the only monk-shake compatible skeleton
+    self.skeletons['default'] ||= 'git://github.com/rstacruz/monk-plus.git'
   end
 
   def save!
