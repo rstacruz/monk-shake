@@ -28,6 +28,7 @@ class Monk < Shake
     end
 
     skeleton_files = cache_skeleton(name)
+    pass "Error: can't retrieve the skeleton files."  unless skeleton_files
     cp_r skeleton_files, target
 
     in_path (target) {
