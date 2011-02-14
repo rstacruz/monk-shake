@@ -16,7 +16,8 @@ module Monk::InitHelpers
 
     mkdir_p fx(path, '..')
 
-    system "git clone --depth 1 #{repo} #{path}"
+    git_clone repo, path
+
     if $?.to_i != 0
       rm_rf path
       return nil
@@ -25,5 +26,9 @@ module Monk::InitHelpers
     rm_rf File.join(path, '.git')
 
     path
+  end
+
+  def git_clone(repo, path)
+    system "git clone --depth 1 #{repo} #{path}"
   end
 end

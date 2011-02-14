@@ -14,9 +14,14 @@ end
 # Caching will always happen in a temp folder
 module Monk::InitHelpers
   def cache_path(name=nil)
-    tmp = File.expand_path("../tmp", __FILE__)
-    FileUtils.mkdir tmp  unless File.directory?(tmp)
-    File.join(tmp, name)
+    File.expand_path("../tmp/#{name}", __FILE__)
+  end
+
+  def git_clone(repo, path)
+    FileUtils.mkdir_p path
+    FileUtils.touch File.join(path, 'Monkfile')
+    FileUtils.touch File.join(path, 'init.rb')
+    say_status :run, "git clone --depth 1 #{repo} #{path}"
   end
 end
 

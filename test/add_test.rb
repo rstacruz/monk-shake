@@ -1,10 +1,14 @@
 require File.expand_path('../test_helper', __FILE__)
 
 scope do
-  test 'add' do
+  test 'add fail' do
     monk 'add'
-    assert cout.empty?
-    assert cerr.include?('Invalid usage')
+    assert_invalid
+  end
+
+  test 'add fail 2' do
+    monk 'add x y z'
+    assert_invalid
   end
 
   test 'add success' do

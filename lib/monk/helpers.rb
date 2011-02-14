@@ -106,6 +106,11 @@ module Monk::Helpers
   end
 
   # File helpers
+  def touch(target)
+    say_status :touch, target
+    FileUtils.touch target
+  end
+
   def mkdir_p(target)
     return  if File.directory?(target)
     say_status :mkdir, target
