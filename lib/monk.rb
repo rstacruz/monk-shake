@@ -25,14 +25,12 @@ class Monk < Shake
     repo = config.skeletons[name]
 
     unless repo
-      err "No such skeleton: #{@options[:skeleton]}"
-      err "Type `monk list` for a list of known skeletons."
-      pass
+      pass "No such skeleton: #{@options[:skeleton]}\n" +
+           "Type `monk list` for a list of known skeletons."
     end
 
     if File.exists?(target)
-      err "Error: the target directory already exists."
-      pass
+      pass "Error: the target directory already exists."
     end
 
     skeleton_files = cache_skeleton(name)
@@ -70,8 +68,7 @@ class Monk < Shake
     name = params.first
 
     if name == 'default'
-      err "You can't delete the default skeleton."
-      pass
+      pass "You can't delete the default skeleton."
     elsif config.skeletons[name]
       config.skeletons.delete name.to_s
       config.save!
