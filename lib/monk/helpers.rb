@@ -19,6 +19,19 @@ module Monk::Helpers
     @has_rvm
   end
 
+  def has_gem?(str)
+    _, name, version = str.match(/^([A-Za-z_\-]+) -v(.*)$/).to_a
+    name    ||= str
+    version ||= ">=0"
+
+    begin
+      gem(name, version)
+      true
+    rescue Gem::LoadError
+      false
+    end
+  end
+
   def in_path(path, &blk)
     old = Dir.pwd
     Dir.chdir path
@@ -34,6 +47,7 @@ module Monk::Helpers
     if file
       load file
       @project = File.dirname(file)
+      Dir.chdir @project
     end
   end
 

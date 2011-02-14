@@ -51,6 +51,23 @@ class Monk < Shake
     end
   end
 
+  task(:install) do
+    manifest = '.gems'
+
+    pass "You must run this in a project."  unless project?
+    pass "This project does not have a .gems manifest."  unless File.exists?(manifest)
+
+    gems = File.read(manifest).split("\n")
+
+    gems.reject! { |name| name =~ /^\s*(#|$)/ }
+    pass "The .gems manifest is empty."  unless gems.any?
+
+    gems.reject! { |name| has_gem? name }
+    pass "All good! You have all needed gems installed."  unless gems.any?
+
+    gems.each { |name| system "gem install #{name}" }
+  end
+
   task(:add) do
     wrong_usage  unless params.size == 2
     name, repo = params
@@ -109,9 +126,14 @@ class Monk < Shake
     err
 
     if project?
-      err "Project commands:"
-      other_tasks.each &show_task
+      err "Dependency commands:"
+      tasks_for(:dependency).each &show_task
       err
+      if other_tasks.any?
+        err "Project commands:"
+        other_tasks.each &show_task
+        err
+      end
     else
       err "Commands:"
       tasks_for(:init).each &show_task
@@ -189,5 +211,10 @@ class Monk < Shake
   task(:version).tap do |t|
     t.category    = :help
     t.description = "Shows the Monk version"
+  end
+
+  task(:install).tap do |t|
+    t.category    = :dependency
+    t.description = "Install gems in the .gems manifest file"
   end
 end
