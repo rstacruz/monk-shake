@@ -14,8 +14,9 @@ class Monk < Shake
 
   task(:init) do
     name   = params.extract('-s') || 'default'
+    wrong_usage  if params.size != 1
+
     target = params.shift
-    wrong_usage  if params.any?
 
     unless config.skeletons[name]
       pass "No such skeleton: #{name}\n" +
@@ -137,6 +138,8 @@ class Monk < Shake
   end
 
   task(:help) do
+    show_help_for(params.first) and pass  if params.any?
+
     show_task = Proc.new { |name, t| err "  %-20s %s" % [ t.usage || name, t.description ] }
 
     err "Usage: #{executable} <command>"
@@ -168,6 +171,7 @@ class Monk < Shake
       err "Get started by typing:"
       err "  $ #{executable} init my_project"
       err
+      err "Type `#{executable} help COMMAND` for additional help on a command."
       err "See http://www.monkrb.com for more information."
     end
   end
@@ -196,6 +200,29 @@ class Monk < Shake
     t.category    = :init
     t.usage       = "init NAME"
     t.description = "Starts a Monk project"
+    t.help = %{
+      Usage:
+      
+          #{executable} init NAME [-s SKELETON]
+      
+      Initializes a Monk application of a given name.
+      
+      You may use a different skeleton by specifying `-s SKELETON` where
+      SKELETON refers to the name or URL of the skeleton. If this isn't specified,
+      the default skeleton is used.
+      
+      Examples
+      --------
+      
+      This creates a new Monk/Sinatra application in the directory `myapp`.
+      
+          #{executable} init myapp
+      
+      This creates a new application based on the skeleton in the given Git repo.
+      
+          #{executable} add myskeleton https://github.com/rstacruz/myskeleton.git
+          #{executable} init myapp -s myskeleton
+    }.gsub(/^ {6}/,'').strip.split("\n")
   end
 
   task(:add).tap do |t|
@@ -233,15 +260,52 @@ class Monk < Shake
   task(:install).tap do |t|
     t.category    = :dependency
     t.description = "Install gems in the .gems manifest file"
+    t.help = %{
+      Usage:
+
+          #{executable} install
+          
+      Loads the given gemset name of your project, and installs the gems
+      needed by your project.
+
+      Gems are specified in the `.gems` file. This is created using
+      `#{executable} lock`.
+
+      The gemset name is then specified in `.rvmrc`, which is created upon
+      creating your project with `#{executable} init`.
+    }.gsub(/^ {6}/,'').strip.split("\n")
   end
 
   task(:unpack).tap do |t|
     t.category    = :dependency
     t.description = "Freeze gem dependencies into vendor/"
+    t.help = %{
+      Usage:
+
+          #{executable} unpack
+
+      Freezes the current gem dependencies of your project into the `vendor/`
+      path of your project.
+
+      This allows you to commit the gem contents into your project's repository.
+      This way, deploying your project elsewhere would not need `monk install`
+      or `gem install` to set up the dependencies.
+    }.gsub(/^ {6}/,'').strip.split("\n")
   end
 
   task(:lock).tap do |t|
     t.category    = :dependency
     t.description = "Lock gem dependencies into a .gems manifest file"
+    t.help = %{
+      Usage:
+
+          #{executable} lock
+          
+      Locks the current gem version dependencies of your project into the gem
+      manifest file.
+
+      This creates the `.gems` file for your project, which is then used by
+      `#{executable} install`.
+    }.gsub(/^ {6}/,'').strip.split("\n")
   end
 end

@@ -64,6 +64,21 @@ module Monk::Helpers
     end
   end
 
+  def show_help_for(task)
+    name = params.first
+    task = task(name)
+    pass "No such command. Try: #{executable} help"  unless task
+
+    help = task.help
+    if help
+      help.each { |line| err line }
+      err
+    else
+      err "Usage: #{executable} #{task.usage || name}"
+      err "#{task.description}."  if task.description
+    end
+  end
+
   # Checks if there is a loaded project or not.
   def project?
     ! @project.nil?
