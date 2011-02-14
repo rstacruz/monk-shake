@@ -91,15 +91,15 @@ class Monk < Shake
     wrong_usage  unless params.size == 2
     name, repo = params
 
-    existed = !! config.skeletons[name]
+    existed = !!config.skeletons[name]
 
     config.skeletons[name] = repo
     config.save!
 
     if existed
-      err "Added skeleton #{name}."
-    else
       err "Updated skeleton #{name}."
+    else
+      err "Added skeleton #{name}."
     end
     err "Create a new project from this skeleton by typing: #{executable} init NAME -s #{name}"
   end
