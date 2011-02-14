@@ -23,15 +23,19 @@ class Monk
     name = skeleton || 'default'
 
     unless config.skeletons[name]
-      pass "No such skeleton: #{name}\n" +
+      err "No such skeleton: #{name}\n" +
            "Type `#{executable} list` for a list of known skeletons."
+      return
     end
 
     if File.exists?(target)
-      pass "Error: the target directory already exists."
+      err "Error: the target directory already exists."
+      return
     end
 
     skeleton_files = cache_skeleton(name)
+    err("Error: can't retrieve the skeleton files.") and return  unless skeleton_files
+    
     cp_r skeleton_files, target
 
     in_path (target) {
@@ -126,13 +130,13 @@ class Monk
   end
 
   def unpack
-    ensure_rvm or pass
+    ensure_rvm or return
     system "rvm rvmrc load"
     system "rvm gemset unpack vendor"
   end
 
   def lock
-    ensure_rvm or pass
+    ensure_rvm or return
     system "rvm rvmrc load"
     system "rvm gemset export .gems"
   end
