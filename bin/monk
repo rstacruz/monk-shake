@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
-
-# Emulates require_relative for 1.8
-relative = lambda { |path|
-  File.expand_path(File.join(File.dirname(__FILE__), path.split('/')))
-}
-
-require relative['../vendor/shake/lib/shake']
+require 'rubygems'
+require File.expand_path('../../vendor/shake/lib/shake', __FILE__)
 
 # Legacy Monk compatibility.
 # If there is a Thorfile (but no Monkfile), assume it's a Monk <1.0 project.
@@ -21,7 +16,7 @@ if thor && !monk
   exit
 end
 
-require relative['../lib/monk']
+require File.expand_path('../../lib/monk', __FILE__)
 
 Monk.load_monkfile
 Monk.run!

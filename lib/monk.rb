@@ -1,9 +1,9 @@
 require 'fileutils'
-require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor shake lib shake)))
+require File.expand_path('../../vendor/shake/lib/shake', __FILE__)
 
 class Monk < Shake
   VERSION = "1.0.0.something"
-  PREFIX  = File.expand_path(File.join(File.dirname(__FILE__), 'monk'))
+  PREFIX  = File.expand_path('../monk', __FILE__)
 
   autoload :Helpers,      "#{PREFIX}/helpers"
   autoload :InitHelpers,  "#{PREFIX}/init_helpers"
