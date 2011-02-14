@@ -9,6 +9,7 @@ def monk(cmd)
   $out = ''
   $err = ''
 
+  Monk.load_monkfile
   Monk.run *Shellwords.shellsplit(cmd)
 end
 
@@ -36,9 +37,10 @@ end
 
 tmp_path = File.expand_path('../tmp', __FILE__)
 FileUtils.mkdir_p tmp_path
-Dir.chdir tmp_path
 
 prepare do
   # Clear config
+  Dir.chdir tmp_path
   Monk.instance_variable_set :@config, nil
+  FileUtils.rm_rf 'Monkfile'
 end
