@@ -1,5 +1,4 @@
 require 'fileutils'
-
 require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor shake lib shake)))
 
 class Monk < Shake

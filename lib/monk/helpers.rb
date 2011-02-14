@@ -25,6 +25,12 @@ module Monk::Helpers
     err "See http://rvm.beginrescueend.com for more info."
   end
 
+  # Checks if a certain gem is installed.
+  # The format is the same as that found in the .gems file.
+  #
+  # @example
+  #   has_gem?('nest -v1.1.0')
+  #
   def has_gem?(str)
     _, name, version = str.match(/^([A-Za-z_\-]+) -v(.*)$/).to_a
     name    ||= str
@@ -38,6 +44,7 @@ module Monk::Helpers
     end
   end
 
+  # Performs a given block in the given path.
   def in_path(path, &blk)
     old = Dir.pwd
     Dir.chdir path
