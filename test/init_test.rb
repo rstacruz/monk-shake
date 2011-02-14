@@ -35,6 +35,17 @@ scope do
     assert cerr.include?('exists')
   end
 
+  test 'init caching' do
+    monk 'init x'
+    assert_successful_init 'x'
+    assert cout.include?('git clone')
+
+    assert File.directory?(Monk.cache_path('default'))
+
+    monk 'init x'
+    assert !cout.include?('git clone')
+  end
+
   test 'custom skeleton' do
     monk 'add shivers git://github.com/a/b'
     monk 'init x -s shivers'

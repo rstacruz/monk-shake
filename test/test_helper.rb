@@ -26,12 +26,12 @@ def assert_invalid
 end
 
 def assert_successful_init(path)
-    assert cout.include?("Success! You've created a new project")
-    assert cerr.empty?
-    assert File.directory?(path)
-    assert File.file?(File.join(path, 'Monkfile'))
-    assert File.file?(File.join(path, 'init.rb'))
-    assert !File.exists?(File.join(path, '.git'))
+  assert cout.include?("Success! You've created a new project")
+  assert cerr.empty?
+  assert File.directory?(path)
+  assert File.file?(File.join(path, 'Monkfile'))
+  assert File.file?(File.join(path, 'init.rb'))
+  assert !File.exists?(File.join(path, '.git'))
 end
 
 tmp_path = File.expand_path('../tmp', __FILE__)
