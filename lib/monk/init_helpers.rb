@@ -1,6 +1,6 @@
 module Monk::InitHelpers
-  def cache_path(name)
-    fx "~/.cache/monk/#{name}"
+  def cache_path(name=nil)
+    fx "~/.cache/monk", name
   end
 
   def directory_with_files?(path)
@@ -9,15 +9,16 @@ module Monk::InitHelpers
 
   # Cache skeleton files into ~/.cache/monk/default
   def cache_skeleton(name)
-    path = cache_path(name)
+    repo = config.skeletons[name]  or return
 
+    path = cache_path(name)
     return path  if directory_with_files?(path)
 
-    mkdir_p path
+    mkdir_p fx(path, '..')
 
-    system "git clone --depth 1 -q #{repo} #{cache_path}"
+    system "git clone --depth 1 #{repo} #{path}"
     pass  unless $?.to_i == 0
 
-    rm_rf File.join(cache_path, '.git')
+    rm_rf File.join(path, '.git')
   end
 end

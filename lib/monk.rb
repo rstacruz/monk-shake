@@ -18,11 +18,9 @@ class Monk < Shake
     target = params.shift
     wrong_usage  if params.any?
 
-    repo = config.skeletons[name]
-
-    unless repo
+    unless config.skeletons[name]
       pass "No such skeleton: #{name}\n" +
-           "Type `monk list` for a list of known skeletons."
+           "Type `#{executable} list` for a list of known skeletons."
     end
 
     if File.exists?(target)
@@ -31,6 +29,7 @@ class Monk < Shake
 
     skeleton_files = cache_skeleton(name)
     cp_r skeleton_files, target
+    rm_rf File.join(target, '.git')
     system "touch #{File.join(target, 'Monkfile')}"  # Temporary!
 
     puts 
@@ -38,7 +37,7 @@ class Monk < Shake
     puts "Get started now:"
     puts
     puts "  $ cd #{target}"
-    puts "  $ monk start"
+    puts "  $ #{executable} start"
     puts
   end
 
@@ -74,6 +73,11 @@ class Monk < Shake
       err "No such skeleton."
       err "See `#{executable} list` for a list of skeletons."
     end
+  end
+
+  task(:purge) do
+    rm_rf cache_path  if File.directory?(cache_path)
+    err "Monk cache clear."
   end
 
   task(:list) do
@@ -160,6 +164,11 @@ class Monk < Shake
   task(:list).tap do |t|
     t.category    = :skeleton
     t.description = "Lists known skeletons"
+  end
+
+  task(:purge).tap do |t|
+    t.category    = :skeleton
+    t.description = "Clears the skeleton cache"
   end
 
   task(:help).tap do |t|

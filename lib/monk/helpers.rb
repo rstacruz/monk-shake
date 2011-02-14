@@ -36,8 +36,8 @@ module Monk::Helpers
   end
 
   # File expand: fx('~/.cache/monk')
-  def fx(path)
-    File.expand_path File.join(*path.split('/'))
+  def fx(*paths)
+    File.expand_path File.join(*paths.join('/').split('/'))
   end
 
   def system(cmd)
@@ -53,6 +53,7 @@ module Monk::Helpers
 
   # File helpers
   def mkdir_p(target)
+    return  if File.directory?(target)
     say_status :mkdir, target
     FileUtils.mkdir_p target
   end
