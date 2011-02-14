@@ -1,4 +1,4 @@
 Monk
 ====
 
-New Shake-based monk?
+A feature-complete implementation of Monk that uses Shake instead of Thor.

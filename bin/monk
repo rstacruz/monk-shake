@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'monk'))
+require File.expand_path(File.join(File.dirname(__FILE__), %w(.. vendor shake lib shake)))
 
+# Legacy Monk compatibility.
+# If there is a Thorfile (but no Monkfile), assume it's a Monk <1.0 project.
+# Defer to Thor for processing of that file.
+thor = Shake.find_in_project('Thorfile')
+monk = Shake.find_in_project('Monkfile')
+if thor && !monk
+  Dir.chdir File.dirname(thor)
+  require 'thor'
+  load 'Thorfile'
+  Monk.start
+  exit
+end
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'monk'))
 Monk.load_monkfile
 Monk.run!
