@@ -6,6 +6,9 @@ It is modeled after Monk 1.0 beta.
 
 See more info in [monkrb.com](http://www.morkrb.com).
 
+**NOTE:** This is NOT an official replacement for Monk, nor is it
+supported or endorsed by Citrusbyte.
+
 ### What is it?
 
  * Monk lets you start a Sinatra project painlessly with everything set
@@ -13,8 +16,11 @@ See more info in [monkrb.com](http://www.morkrb.com).
 
 ### Get started
 
+You may need to uninstall the original monk gem.
+
    $ rvm @global             # TIP: Recommended for RVM users
-   $ gem install monk-shake
+   $ gem uninstall monk
+   $ gem install monk-shake --pre
    $ monk
 
 ### Differences from the real Monk in general

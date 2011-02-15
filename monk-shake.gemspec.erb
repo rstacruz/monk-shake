@@ -1,0 +1,14 @@
+<% require "./lib/monk" -%>
+Gem::Specification.new do |s|
+  s.name = "monk-shake"
+  s.version = "<%= Monk::VERSION %>"
+  s.summary = "Monk the Sinatra glue framework -- reloaded"
+  s.description = "Monk lets you build Sinatra applications quickly and painlessly by letting it set up the directory structure for you. Monk-shake is a rewritten version of Monk that uses the Shake gem."
+  s.authors = ["Rico Sta. Cruz"]
+  s.email = ["rico@sinefunc.com"]
+  s.homepage = "http://www.github.com/rstacruz/monk-shake"
+  s.files = <%= Dir["{bin,lib,test}/**/*", "README*", "CHANGELOG*"].inspect %>
+  s.executables.push("monk")
+
+  s.add_dependency("shake", "~> 0.1.1")
+end
