@@ -1,8 +1,10 @@
+$:.push *Dir[File.expand_path('../../lib', __FILE__)]
+
 require 'cutest'
 require 'shellwords'
 require 'fileutils'
+require 'monk'
 
-require File.expand_path('../../lib/monk', __FILE__)
 require File.expand_path('../mock', __FILE__)
 
 def monk(cmd)

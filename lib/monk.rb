@@ -1,5 +1,7 @@
+$:.push *Dir[File.expand_path('../../vendor/*/lib', __FILE__)]
+
 require 'fileutils'
-require File.expand_path('../../vendor/shake/lib/shake', __FILE__)
+require 'shake'
 
 class Monk < Shake
   VERSION = "1.0.0.something"
