@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "monk-shake"
-  s.version = "1.0.pre"
+  s.version = "1.0.0.pre1"
   s.summary = "Monk the Sinatra glue framework -- reloaded"
   s.description = "Monk lets you build Sinatra applications quickly and painlessly by letting it set up the directory structure for you. Monk-shake is a rewritten version of Monk that uses the Shake gem."
   s.authors = ["Rico Sta. Cruz"]
