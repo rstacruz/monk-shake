@@ -49,7 +49,7 @@ class Monk < Shake
     puts
 
     if rvm?
-      puts "An RVM gemset @#{target} has been created for you."
+      puts "The RVM gemset #{rvm_gemset} has been created for you."
       puts
     end
   end
