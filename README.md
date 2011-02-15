@@ -23,6 +23,19 @@ You may need to uninstall the original monk gem.
     $ gem install monk-shake --pre
     $ monk
 
+Then create your first project
+
+    $ monk init myproject
+
+You'll get a new directory called `myproject/`. Start hacking!
+Monk-shake provides the following commands while in your
+project folder:
+
+    $ cd myproject/
+    $ monk install        # Install needed gems
+    $ monk start          # Starts the server
+    $ monk irb            # Starts a console session
+
 ### Differences from the real Monk in general
 
  * *No more Thor!* The new Monkfile has deprecated the old Thorfile.
