@@ -1,29 +1,35 @@
 Monk-shake
 ==========
 
-A feature-complete rewrite of Monk that uses Shake instead of Thor.
-It is modeled after Monk 1.0 beta.
+An UNOFFICIAL feature-complete rewrite of Monk that uses Shake
+instead of Thor. It is modeled after Monk 1.0 beta. See more info
+at [monkrb.com](http://www.morkrb.com).
 
-See more info in [monkrb.com](http://www.morkrb.com).
-
-**NOTE:** This is NOT an official replacement for Monk, nor is it
-supported or endorsed by Citrusbyte.
+**NOTE:** *This is NOT an official replacement for Monk, nor is it
+supported or endorsed by Citrusbyte.*
 
 ### What is it?
 
- * Monk lets you start a Sinatra project painlessly with everything set
-   up for you.
+Monk lets you build Sinatra applications quickly and painlessly by letting it
+set up the directory structure for you.
 
 ### Get started
 
-You may need to uninstall the original monk gem.
+You may need to uninstall the original monk gem. (Alternatively, you can
+install monk-shake in a new RVM gemset instead.)
 
     $ rvm @global             # TIP: Recommended for RVM users
     $ gem uninstall monk
+
+Install it:
+
     $ gem install monk-shake --pre
+
+Try it out! This should help you get started:
+
     $ monk
 
-Then create your first project
+Now create your first project:
 
     $ monk init myproject
 
@@ -36,7 +42,7 @@ project folder:
     $ monk start          # Starts the server
     $ monk irb            # Starts a console session
 
-### Differences from the real Monk in general
+### Differences from the official Monk in general
 
  * *No more Thor!* The new Monkfile has deprecated the old Thorfile.
    This version uses Shake instead.
