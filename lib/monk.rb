@@ -67,7 +67,10 @@ class Monk < Shake
     gems.reject! { |name| has_gem? name }
     pass "All good! You have all needed gems installed."  unless gems.any?
 
-    unless rvm?
+    if rvm?
+      gemset = File.basename(`rvm gemset dir`.strip)
+      say_status :info, "Installing to RVM gemset #{gemset}."
+    else
       err "Tip: RVM is a great way to manage gems across multiple projects."
       err "See http://rvm.beginrescueend.com for more info."
       err

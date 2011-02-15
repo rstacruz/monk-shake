@@ -1,0 +1,4 @@
+v1.0.0.pre2
+-----------
+
+ * `monk install` shows what gemset it's being installed to.
