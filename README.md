@@ -13,7 +13,7 @@ See more info in [monkrb.com](http://www.morkrb.com).
 
 ### Get started
 
-   $ rvm @global             # TIP: RVM user? global gemset is the best place to install it in
+   $ rvm @global             # TIP: Recommended for RVM users
    $ gem install monk-shake
    $ monk
 

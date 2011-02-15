@@ -34,7 +34,7 @@ class Monk < Shake
     in_path (target) {
       rm_rf '.git'
       touch 'Monkfile'
-      system_q "rvm 1.9.2@#{target} --rvmrc --create"  if rvm?
+      system_q "rvm #{RUBY_VERSION}@#{target} --rvmrc --create"  if rvm?
       system_q "rvm rvmrc trust"  if rvm?
     }
 
