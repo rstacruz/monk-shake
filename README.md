@@ -1,7 +1,8 @@
 Monk-shake
 ==========
 
-An UNOFFICIAL feature-complete rewrite of Monk that uses Shake
+An UNOFFICIAL feature-complete rewrite of Monk that uses the
+lightweight and superfast [Shake](http://github.com/rstacruz/shake)
 instead of Thor. It is modeled after Monk 1.0 beta. See more info
 at [monkrb.com](http://www.morkrb.com).
 
