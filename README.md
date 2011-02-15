@@ -1,5 +1,5 @@
-Monk
-====
+Monk-shake
+==========
 
 A feature-complete rewrite of Monk that uses Shake instead of Thor.
 It is modeled after Monk 1.0 beta.
