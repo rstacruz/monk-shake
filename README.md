@@ -77,3 +77,16 @@ project folder:
  * `monk install` will first check if a gem is installed. It will not
    try to reinstall gems you already have.
 
+Authors
+=======
+
+Monk-shake is a derivative work by [Rico Sta. Cruz](http://www.ricostacruz.com),
+heavily based on the original implementations of [Monk](http://www.monkrb.com).
+
+Released under the MIT license.
+
+Monk (the original [1.0 beta](http://github.com/monk/monk) and 
+[0.x](https://github.com/monkrb/monk) implementations) is
+copyright (c) 2009 Michel Martens and Damian Janowski. All credit
+goes out to their (and contributors) hard work for the original idea,
+the API and the Monk skeletons.
