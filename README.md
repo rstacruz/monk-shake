@@ -18,10 +18,10 @@ supported or endorsed by Citrusbyte.
 
 You may need to uninstall the original monk gem.
 
-   $ rvm @global             # TIP: Recommended for RVM users
-   $ gem uninstall monk
-   $ gem install monk-shake --pre
-   $ monk
+    $ rvm @global             # TIP: Recommended for RVM users
+    $ gem uninstall monk
+    $ gem install monk-shake --pre
+    $ monk
 
 ### Differences from the real Monk in general
 
