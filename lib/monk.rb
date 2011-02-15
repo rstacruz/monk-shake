@@ -55,7 +55,6 @@ class Monk < Shake
   task(:install) do
     manifest = '.gems'
 
-    pass "You must run this in a project."  unless project?
     pass "This project does not have a .gems manifest."  unless File.exists?(manifest)
 
     gems = File.read(manifest).split("\n")
