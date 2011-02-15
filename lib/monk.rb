@@ -55,21 +55,16 @@ class Monk < Shake
   end
 
   task(:install) do
-    manifest = '.gems'
-
     pass "This project does not have a .gems manifest."  unless File.exists?(manifest)
 
-    gems = File.read(manifest).split("\n")
-
-    gems.reject! { |name| name =~ /^\s*(#|$)/ }
+    gems = gems_from_manifest
     pass "The .gems manifest is empty."  unless gems.any?
 
     gems.reject! { |name| has_gem? name }
     pass "All good! You have all needed gems installed."  unless gems.any?
 
     if rvm?
-      gemset = File.basename(`rvm gemset dir`.strip)
-      say_status :info, "Installing to RVM gemset #{gemset}."
+      say_status :info, "Installing to RVM gemset #{rvm_gemset}."
     else
       err "Tip: RVM is a great way to manage gems across multiple projects."
       err "See http://rvm.beginrescueend.com for more info."

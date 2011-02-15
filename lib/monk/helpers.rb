@@ -19,6 +19,18 @@ module Monk::Helpers
     @has_rvm
   end
 
+  # Reads the gems manifest file and returns the gems to be installed.
+  def gems_from_manifest(manifest='.gems')
+    gems = File.read(manifest).split("\n")
+
+    gems.reject! { |name| name =~ /^\s*(#|$)/ }
+  end
+
+  # Returns the name of the current RVM gemset.
+  def rvm_gemset
+    File.basename(`rvm gemset dir`.strip)
+  end
+
   def ensure_rvm
     return true  if rvm?
     err "You need RVM installed for this command."
