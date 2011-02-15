@@ -95,6 +95,8 @@ class Monk < Shake
     wrong_usage  unless params.size == 2
     name, repo = params
 
+    pass "You can't update the default skeleton."  if name == 'default'
+
     existed = !!config.skeletons[name]
 
     config.skeletons[name] = repo
