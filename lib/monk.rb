@@ -4,7 +4,7 @@ require 'fileutils'
 require 'shake'
 
 class Monk < Shake
-  VERSION = "1.0.0.pre1"
+  VERSION = "1.0.0.pre2"
   PREFIX  = File.expand_path('../monk', __FILE__)
 
   autoload :Helpers,      "#{PREFIX}/helpers"

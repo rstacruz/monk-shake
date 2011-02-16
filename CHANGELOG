@@ -8,3 +8,8 @@ v1.0.0.pre2
  * `monk init` will use the same RVM Ruby version patch level if RVM is installed.
 
  * `monk lock` will back up your old .gems file if needed.
+
+v1.0.0.pre1
+-----------
+
+ * Initial.
