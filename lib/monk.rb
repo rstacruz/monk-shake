@@ -37,7 +37,7 @@ class Monk < Shake
       rm_rf '.git'
       touch 'Monkfile'
       if rvm?
-        system_q "rvm #{RUBY_VERSION}@#{target} --rvmrc --create"
+        system_q "rvm #{rvm_ruby_version}@#{target} --rvmrc --create"
         system_q "rvm rvmrc trust"
       else
         puts
@@ -54,13 +54,13 @@ class Monk < Shake
     puts
 
     if rvm?
-      puts "The RVM gemset #{rvm_gemset} has been created for you."
+      puts "The RVM gemset #{rvm_ruby_version}@#{target} has been created for you."
       puts
     end
   end
 
   task(:install) do
-    pass "This project does not have a .gems manifest."  unless File.exists?(manifest)
+    pass "This project does not have a .gems manifest."  unless File.exists?('.gems')
 
     gems = gems_from_manifest
     pass "The .gems manifest is empty."  unless gems.any?

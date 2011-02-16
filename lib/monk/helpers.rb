@@ -28,7 +28,11 @@ module Monk::Helpers
 
   # Returns the name of the current RVM gemset.
   def rvm_gemset
-    File.basename(`rvm gemset dir`.strip)
+    File.basename(`rvm current`.strip)
+  end
+
+  def rvm_ruby_version
+    rvm_gemset.split('@').first
   end
 
   def ensure_rvm
