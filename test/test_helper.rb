@@ -10,6 +10,7 @@ require File.expand_path('../mock', __FILE__)
 def monk(cmd)
   $out = ''
   $err = ''
+  $rvm = Array.new
 
   Monk.load_monkfile
   Monk.run *Shellwords.shellsplit(cmd)
@@ -21,6 +22,10 @@ end
 
 def cerr
   $err
+end
+
+def rvm_commands
+  $rvm
 end
 
 def assert_invalid
@@ -45,4 +50,5 @@ prepare do
   Dir.chdir tmp_path
   Monk.instance_variable_set :@config, nil
   FileUtils.rm_rf 'Monkfile'
+  $has_rvm = false
 end

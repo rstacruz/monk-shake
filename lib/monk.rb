@@ -86,15 +86,14 @@ class Monk < Shake
   task(:unpack) do
     ensure_rvm or pass
     rvm "rvmrc load"
-    system "rvm rvmrc load"
-    system "rvm gemset unpack vendor"
+    rvm "gemset unpack vendor"
   end
 
   task(:lock) do
     ensure_rvm or pass
     backup_gems_file  if File.exists?('.gems')
-    system "rvm rvmrc load"
-    system "rvm gemset export .gems"
+    rvm "rvmrc load"
+    rvm "gemset export .gems"
   end
 
   task(:add) do

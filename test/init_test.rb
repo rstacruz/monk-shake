@@ -59,5 +59,19 @@ scope do
     assert cerr.include?('No such skeleton')
   end
 
+  test 'no rvm' do
+    monk 'init x'
+    assert cout.include?("skipping creating .rvmrc")
+    assert rvm_commands.empty?
+  end
+
+  test 'with rvm' do
+    $has_rvm = true
+    monk 'init x'
+    assert !cout.include?("skipping creating .rvmrc")
+    assert rvm_commands.to_s.include?('--rvmrc')
+    assert rvm_commands.to_s.include?('rvmrc trust')
+  end
+
   # TODO: git fail test
 end

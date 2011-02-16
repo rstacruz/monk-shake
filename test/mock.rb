@@ -27,7 +27,11 @@ end
 
 module Monk::RvmHelpers
   def rvm?
-    false
+    $has_rvm
+  end
+
+  def rvm(cmd, options={})
+    $rvm << cmd
   end
 end
 
