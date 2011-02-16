@@ -14,6 +14,7 @@ module Monk::RvmHelpers
   end
 
   def rvm(cmd, options={})
+    say_status :run, "rvm #{cmd}"
     return `rvm #{cmd}`  if options[:output]
     system "rvm #{cmd}"
   end
