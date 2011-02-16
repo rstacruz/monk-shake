@@ -22,8 +22,7 @@ module Monk::Helpers
   # Reads the gems manifest file and returns the gems to be installed.
   def gems_from_manifest(manifest='.gems')
     gems = File.read(manifest).split("\n")
-
-    gems.reject! { |name| name =~ /^\s*(#|$)/ }
+    gems.reject { |name| name =~ /^\s*(#|$)/ }
   end
 
   # Returns the name of the current RVM gemset.
@@ -115,8 +114,12 @@ module Monk::Helpers
     `#{cmd}`
   end
 
-  def say_status(what, cmd)
-    c1 = "\033[0;33m"
+  def say_info(str)
+    say_status '*', str, 30
+  end
+
+  def say_status(what, cmd, color=32)
+    c1 = "\033[0;#{color}m"
     c0 = "\033[0;m"
     puts "#{c1}%10s#{c0}  %s" % [ what, cmd ]
   end
@@ -138,6 +141,10 @@ module Monk::Helpers
     FileUtils.cp_r from, target
   end
 
+  def mv(from, target)
+    say_status :move, "#{from} -> #{target}"
+    FileUtils.mv from, target
+  end
   def rm_rf(target)
     say_status :delete, target
     FileUtils.rm_rf target

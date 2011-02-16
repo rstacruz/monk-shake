@@ -87,6 +87,7 @@ class Monk < Shake
 
   task(:lock) do
     ensure_rvm or pass
+    backup_gems_file  if File.exists?('.gems')
     system "rvm rvmrc load"
     system "rvm gemset export .gems"
   end

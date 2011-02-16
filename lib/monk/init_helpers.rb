@@ -31,4 +31,12 @@ module Monk::InitHelpers
   def git_clone(repo, path)
     system "git clone --depth 1 #{repo} #{path}"
   end
+
+  def backup_gems_file(manifest='.gems')
+    if File.exists?(manifest)
+      time = File.mtime(manifest).strftime('%Y%m%d')
+      say_info "#{manifest} file exists; moving aside to preserve."
+      mv manifest, "#{manifest}.#{time}"
+    end
+  end
 end
