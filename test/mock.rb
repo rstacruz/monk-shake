@@ -25,6 +25,12 @@ module Monk::InitHelpers
   end
 end
 
+module Monk::RvmHelpers
+  def rvm?
+    false
+  end
+end
+
 # Config will never load the config file
 class Monk::Config
   def self.load

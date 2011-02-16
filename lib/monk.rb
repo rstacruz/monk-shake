@@ -9,10 +9,14 @@ class Monk < Shake
 
   autoload :Helpers,      "#{PREFIX}/helpers"
   autoload :InitHelpers,  "#{PREFIX}/init_helpers"
+  autoload :RvmHelpers,   "#{PREFIX}/rvm_helpers"
+  autoload :FileHelpers,  "#{PREFIX}/file_helpers"
   autoload :Config,       "#{PREFIX}/config"
 
   extend Helpers
   extend InitHelpers
+  extend FileHelpers
+  extend RvmHelpers
 
   task(:init) do
     name   = params.extract('-s') || 'default'
@@ -37,8 +41,8 @@ class Monk < Shake
       rm_rf '.git'
       touch 'Monkfile'
       if rvm?
-        system_q "rvm #{rvm_ruby_version}@#{target} --rvmrc --create"
-        system_q "rvm rvmrc trust"
+        rvm "#{rvm_ruby_version}@#{target} --rvmrc --create", :output => true
+        rvm "rvmrc trust", :output => true
       else
         puts
         puts "RVM not installed, skipping creating .rvmrc."
@@ -81,6 +85,7 @@ class Monk < Shake
 
   task(:unpack) do
     ensure_rvm or pass
+    rvm "rvmrc load"
     system "rvm rvmrc load"
     system "rvm gemset unpack vendor"
   end
