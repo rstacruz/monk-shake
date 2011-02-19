@@ -77,6 +77,17 @@ project folder:
  * `monk install` will first check if a gem is installed. It will not
    try to reinstall gems you already have.
 
+Testing
+-------
+
+Install needed gems
+
+    cat .gems | grep -v \# | xargs gem install
+
+Run the tests
+
+    rake test
+
 Authors
 =======
 
