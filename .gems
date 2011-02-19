@@ -1,2 +1,2 @@
-cutest -v "~> 0.1"
+cutest -v "~> 1.0"
 shake -v "~> 0.1"

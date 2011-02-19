@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.email = ["rico@sinefunc.com"]
   s.homepage = "http://www.github.com/rstacruz/monk-shake"
   s.files = <%= Dir["{bin,lib,test}/**/*", "*.md", "Rakefile"].inspect %>
-  s.executables.push("monk")
+  s.executables.push "monk"
 
-  s.add_dependency("shake", "~> 0.1.1")
+  s.add_dependency "shake", "~> 0.1"
+  s.add_development_dependency "cutest", "~> 1.0"
 end
