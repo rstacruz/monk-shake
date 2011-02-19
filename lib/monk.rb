@@ -71,16 +71,18 @@ class Monk < Shake
   end
 
   task(:install) do
-    pass "This project does not have a .gems manifest."  unless File.exists?('.gems')
+    file = params.first || '.gems'
 
-    gems = gems_from_manifest
-    pass "The .gems manifest is empty."  unless gems.any?
+    pass "This project does not have a gems manifest (#{file})."  unless File.exists?(file)
+
+    gems = gems_from_manifest(file)
+    pass "The #{file} manifest is empty."  unless gems.any?
 
     gems.reject! { |name| has_gem? name }
     pass "All good! You have all needed gems installed."  unless gems.any?
 
     if rvm?
-      say_status :info, "Installing to RVM gemset #{rvm_gemset}."
+      say_info "Installing to RVM gemset #{rvm_gemset}."
     else
       err "Tip: RVM is a great way to manage gems across multiple projects."
       err "See http://rvm.beginrescueend.com for more info."
@@ -282,13 +284,16 @@ class Monk < Shake
     t.help = %{
       Usage:
 
-          #{executable} install
+          #{executable} install [FILE]
           
       Loads the given gemset name of your project, and installs the gems
       needed by your project.
 
       Gems are specified in the `.gems` file. This is created using
       `#{executable} lock`.
+
+      If FILE is specified, the gems will be read from that file instead of
+      `.gems`.
 
       The gemset name is then specified in `.rvmrc`, which is created upon
       creating your project with `#{executable} init`.

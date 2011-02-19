@@ -3,6 +3,9 @@ v1.0.0.pre2
 
  * `monk install` shows what gemset it's being installed to.
 
+ * You may now install from custom gems files by `monk install .gems.development`
+   for example.
+
  * `monk add` now will stop you if you try to update the default skeleton.
 
  * `monk init` will use the same RVM Ruby version patch level if RVM is installed.
