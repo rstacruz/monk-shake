@@ -22,18 +22,21 @@ module Monk::Helpers
   #
   # @example
   #   has_gem?('nest -v1.1.0')
+  #   has_gem?('nest -v "~> 1"')
   #
   def has_gem?(str)
-    _, name, version = str.match(/^([A-Za-z_\-]+) -v(.*)$/).to_a
-    name    ||= str
-    version ||= ">=0"
-
+    name, version = parse_gem_line(str)
     begin
-      gem(name, version)
+      gem(name, version || '>=0')
       true
     rescue Gem::LoadError
       false
     end
+  end
+
+  def parse_gem_line(str)
+    _, name, version = str.match(/^([A-Za-z_\-]+) (?:-v|--version) *"?(.*?)"?$/).to_a
+    [name || str, version]
   end
 
   # Performs a given block in the given path.
