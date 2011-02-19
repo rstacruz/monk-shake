@@ -1,10 +1,14 @@
 v1.0.0.pre2 (Unreleased)
 ------------------------
 
- * `monk install` shows what gemset it's being installed to.
+ * `monk install` improvements:
 
- * You may now install from custom gems files by `monk install .gems.development`
-   for example.
+     * It now shows what gemset it's being installed to.
+
+     * It now installs all gems in one go, instead of one-by-one.
+
+     * You may now install from custom gems files.
+       Example: `monk install .gems.development`
 
  * `monk add` now will stop you if you try to update the default skeleton.
 

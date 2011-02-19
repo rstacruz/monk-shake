@@ -89,7 +89,7 @@ class Monk < Shake
       err
     end
 
-    gems.each { |name| system "gem install #{name}" }
+    system "gem install #{gems.join(' ')}"
   end
 
   task(:unpack) do
