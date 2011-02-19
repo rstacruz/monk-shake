@@ -1,2 +1,7 @@
+# To install these...
+#  ...with Monk:   monk install
+#   ...with RVM:   cat .gems | grep -v \# | xargs gem install
+#  ...otherwise:   cat .gems | grep -v \# | xargs sudo gem install
+
 cutest -v "~> 1.0"
 shake -v "~> 0.1"
