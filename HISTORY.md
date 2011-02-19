@@ -9,6 +9,8 @@ v1.0.0.pre2
 
  * `monk lock` will back up your old .gems file if needed.
 
+ * Ruby 1.8.6 is now the minimum required version.
+
 v1.0.0.pre1
 -----------
 

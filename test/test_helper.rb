@@ -7,13 +7,22 @@ require 'monk'
 
 require File.expand_path('../mock', __FILE__)
 
+def shellsplit(cmd)
+  if Shellwords.respond_to?(:shellsplit)
+    Shellwords.shellsplit(cmd)
+  else
+    cmd.split(' ')
+  end
+end
+
 def monk(cmd)
   $out = ''
   $err = ''
   $rvm = Array.new
 
   Monk.load_monkfile
-  Monk.run *Shellwords.shellsplit(cmd)
+
+  Monk.run *shellsplit(cmd)
 end
 
 def cout

@@ -3,6 +3,13 @@ $:.push *Dir[File.expand_path('../../vendor/*/lib', __FILE__)]
 require 'fileutils'
 require 'shake'
 
+# For 1.8, which lacks #tap
+if RUBY_VERSION < "1.9"
+  class OpenStruct
+    def tap(&blk); yield self; self; end
+  end
+end
+
 class Monk < Shake
   VERSION = "1.0.0.pre2"
   PREFIX  = File.expand_path('../monk', __FILE__)
