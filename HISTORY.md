@@ -5,8 +5,6 @@ v1.0.0.pre2 (Unreleased)
 
      * It now shows what gemset it's being installed to.
 
-     * It now installs all gems in one go, instead of one-by-one.
-
      * You may now install from custom gems files.
        Example: `monk install .gems.development`
 
