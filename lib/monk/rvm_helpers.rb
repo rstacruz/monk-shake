@@ -22,6 +22,6 @@ module Monk::RvmHelpers
   def ensure_rvm
     return true  if rvm?
     err "You need RVM installed for this command."
-    err "See http://rvm.beginrescueend.com for more info."
+    err "See http://rvm.io for more info."
   end
 end
